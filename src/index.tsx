@@ -16,6 +16,7 @@ createServer({
           title: 'Freela',
           type: 'deposit',
           amount: 6000,
+          category: 'Dev',
           createdAt: new Date('2022-02-12 09:00:00')
         },
         {
@@ -23,6 +24,7 @@ createServer({
           title: 'Design Desktop',
           type: 'deposit',
           amount: 10000,
+          category: 'Dev desktop',
           createdAt: new Date('2022-06-23 09:00:00')
         },
         {
@@ -30,6 +32,7 @@ createServer({
           title: 'Pc Gamer',
           type: 'withdraw',
           amount: 5000,
+          category: 'Infra',
           createdAt: new Date('2022-09-15 09:00:00')
         }
       ]
@@ -44,11 +47,13 @@ createServer({
       return this.schema.all('transaction');
     })
 
+    let newId = 4;
     this.post('/transactions', (schema, request) => {
       const data = JSON.parse(request.requestBody);
+      data.id = newId++;
 
       // return schema.create('transation', data);
-      return data;
+      return {transaction: data};
     });
   },
 });
